@@ -5,6 +5,7 @@ import PdfViewer from "@/components/PdfViewer";
 import MarkdownRenderer from "@/components/MdxContent";
 import { TableOfContents } from "@/components/TableOfContents";
 
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
@@ -34,7 +35,7 @@ export default async function DocPage({ params }: PageProps) {
 
   return (
     <div className="relative">
-      <article className="max-w-4xl mx-auto px-8 py-12">
+      <article className="max-w-4xl mx-auto px-8 py-12 xl:mr-64">
         <div className="flex justify-end mb-4">
           <Link
             href={`/docs-edit/${slug.join('/')}`}
