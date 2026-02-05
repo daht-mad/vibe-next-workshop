@@ -1,5 +1,6 @@
 import { put, list } from '@vercel/blob';
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getSession } from '@/lib/auth';
 import { getDocBySlug, getDocContent } from '@/lib/content';
 
@@ -115,6 +116,8 @@ export async function PUT(
       contentType: 'text/markdown',
       allowOverwrite: true,
     });
+
+    revalidatePath(`/docs/${decodedSlug.join('/')}`);
 
     return NextResponse.json({
       success: true,

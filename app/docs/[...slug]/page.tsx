@@ -5,8 +5,6 @@ import PdfViewer from "@/components/PdfViewer";
 import MarkdownRenderer from "@/components/MdxContent";
 import { TableOfContents } from "@/components/TableOfContents";
 
-export const dynamic = 'force-dynamic';
-
 interface PageProps {
   params: Promise<{ slug: string[] }>;
 }
