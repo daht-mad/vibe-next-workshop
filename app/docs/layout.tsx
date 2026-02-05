@@ -11,7 +11,7 @@ export default function DocsLayout({
   return (
     <div className="flex min-h-screen">
       <Sidebar tree={tree} />
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden flex justify-center">
         {children}
       </main>
     </div>

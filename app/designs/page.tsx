@@ -1,5 +1,6 @@
 import { list } from '@vercel/blob';
 import Link from 'next/link';
+import { DeleteDesignButton } from '@/components/DeleteDesignButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -95,19 +96,22 @@ export default async function DesignsPage() {
                               </p>
                             </div>
                           </div>
-                          <svg
-                            className="h-5 w-5 text-gray-400"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
+                          <div className="flex items-center gap-2">
+                            <DeleteDesignButton filename={filename} />
+                            <svg
+                              className="h-5 w-5 text-gray-400"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </div>
                         </div>
                       </div>
                     </Link>

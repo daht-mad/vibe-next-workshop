@@ -86,21 +86,37 @@ export function Sidebar({ tree }: SidebarProps) {
           </h1>
         </Link>
         
-        <div className="mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="mb-4 pb-4 border-b border-gray-200 dark:border-gray-800 space-y-1">
           <Link
-            href="/images"
+            href="/upload"
             className={`
               block px-3 py-2 text-sm rounded-md transition-colors font-medium
               ${
-                pathname === '/images'
+                pathname === '/upload'
                   ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
               }
             `}
           >
             <span className="flex items-center gap-2">
-              <span className="text-base">🖼️</span>
-              이미지 업로드
+              <span className="text-base">📝</span>
+              설계서 업로드
+            </span>
+          </Link>
+          <Link
+            href="/designs"
+            className={`
+              block px-3 py-2 text-sm rounded-md transition-colors font-medium
+              ${
+                pathname === '/designs' || pathname.startsWith('/designs/')
+                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }
+            `}
+          >
+            <span className="flex items-center gap-2">
+              <span className="text-base">📋</span>
+              설계서 목록
             </span>
           </Link>
         </div>

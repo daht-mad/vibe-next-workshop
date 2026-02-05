@@ -1,4 +1,4 @@
-import { put, list } from '@vercel/blob';
+import { put, list, del } from '@vercel/blob';
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 
@@ -96,6 +96,51 @@ export async function PUT(
     console.error('Update file error:', error);
     return NextResponse.json(
       { error: '파일 수정 중 오류가 발생했습니다' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  _request: NextRequest,
+  { params }: RouteContext
+) {
+  try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json(
+        { error: '로그인이 필요합니다' },
+        { status: 401 }
+      );
+    }
+
+    const { filename } = await params;
+    const decodedFilename = decodeURIComponent(filename);
+
+    const { blobs } = await list({
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    });
+
+    const existingBlob = blobs.find(b => b.pathname === decodedFilename);
+    if (!existingBlob) {
+      return NextResponse.json(
+        { error: '파일을 찾을 수 없습니다' },
+        { status: 404 }
+      );
+    }
+
+    await del(existingBlob.url, {
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: '파일이 삭제되었습니다',
+    });
+  } catch (error) {
+    console.error('Delete file error:', error);
+    return NextResponse.json(
+      { error: '파일 삭제 중 오류가 발생했습니다' },
       { status: 500 }
     );
   }

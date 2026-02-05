@@ -32,8 +32,8 @@ export default async function DocPage({ params }: PageProps) {
   const content = await getDocContentWithBlob(slug);
 
   return (
-    <div className="relative">
-      <article className="max-w-4xl mx-auto px-8 py-12 xl:mr-64">
+    <div className="relative w-full max-w-6xl">
+      <article className="max-w-4xl mx-auto px-8 py-12">
         <div className="flex justify-end mb-4">
           <Link
             href={`/docs-edit/${slug.join('/')}`}
