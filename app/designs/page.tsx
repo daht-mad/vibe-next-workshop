@@ -9,7 +9,9 @@ export default async function DesignsPage() {
     token: process.env.BLOB_READ_WRITE_TOKEN,
   });
 
-  const mdFiles = blobs.filter(blob => blob.pathname.endsWith('.md'));
+  const mdFiles = blobs.filter(blob => 
+    blob.pathname.startsWith('설계서_') && blob.pathname.endsWith('.md')
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

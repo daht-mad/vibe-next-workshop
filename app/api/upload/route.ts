@@ -29,9 +29,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (file.type !== 'text/markdown' && file.type !== 'text/plain' && file.type !== '') {
+    if (!file.name.normalize('NFC').includes('설계서')) {
       return NextResponse.json(
-        { error: '.md 파일만 업로드 가능합니다' },
+        { error: '파일명에 "설계서"가 포함되어야 합니다' },
         { status: 400 }
       );
     }
@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
     const blob = await put(newFilename, file, {
       access: 'public',
       token: process.env.BLOB_READ_WRITE_TOKEN,
+      allowOverwrite: true,
     });
 
     return NextResponse.json({
@@ -52,8 +53,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Upload error:', error);
+    const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류';
     return NextResponse.json(
-      { error: '업로드 중 오류가 발생했습니다' },
+      { error: `업로드 중 오류가 발생했습니다: ${errorMessage}` },
       { status: 500 }
     );
   }

@@ -17,6 +17,10 @@ export default function UploadPage() {
       setError('.md 파일만 업로드 가능합니다');
       return false;
     }
+    if (!file.name.normalize('NFC').includes('설계서')) {
+      setError('파일명에 "설계서"가 포함되어야 합니다');
+      return false;
+    }
     return true;
   };
 
@@ -124,6 +128,9 @@ export default function UploadPage() {
           </svg>
           <p className="mt-4 text-sm text-gray-600">
             .md 파일을 드래그 앤 드롭하거나 클릭하여 선택하세요
+          </p>
+          <p className="mt-2 text-xs text-gray-400">
+            파일명에 "설계서"가 포함된 .md 파일만 업로드 가능합니다
           </p>
           <input
             ref={fileInputRef}

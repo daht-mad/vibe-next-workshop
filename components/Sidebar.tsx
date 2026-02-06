@@ -10,7 +10,8 @@ interface SidebarProps {
 }
 
 function TreeNode({ node, depth = 0 }: { node: ContentNode; depth?: number }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const defaultOpen = node.name.toLowerCase() === "curriculum";
+  const [isOpen, setIsOpen] = useState(defaultOpen);
   const pathname = usePathname();
 
   const isFolder = node.type === "folder";

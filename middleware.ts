@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
     if (token) {
       const session = await verifyToken(token);
       if (session) {
-        return NextResponse.redirect(new URL('/docs/curriculum', request.url));
+        return NextResponse.redirect(new URL('/docs/가이드/0-사전설치/curriculum', request.url));
       }
     }
     return NextResponse.redirect(new URL('/login', request.url));
