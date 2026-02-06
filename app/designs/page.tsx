@@ -1,6 +1,7 @@
 import { list } from '@vercel/blob';
 import Link from 'next/link';
 import { DeleteDesignButton } from '@/components/DeleteDesignButton';
+import { DownloadDesignButton } from '@/components/DownloadDesignButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -99,6 +100,7 @@ export default async function DesignsPage() {
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
+                            <DownloadDesignButton filename={filename} />
                             <DeleteDesignButton filename={filename} />
                             <svg
                               className="h-5 w-5 text-gray-400"
