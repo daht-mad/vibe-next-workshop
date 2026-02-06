@@ -22,7 +22,7 @@ export default async function DocPage({ params }: PageProps) {
   if (isPdf) {
     const pdfUrl = `/api/pdf?path=${encodeURIComponent(filePath)}`;
     return (
-      <article className="max-w-4xl mx-auto px-8 py-12">
+      <article className="max-w-4xl mx-auto px-4 md:px-8 py-8 md:py-12">
         <PdfViewer fileUrl={pdfUrl} />
         <DocNavigation prev={prev} next={next} />
       </article>
@@ -33,7 +33,7 @@ export default async function DocPage({ params }: PageProps) {
 
   return (
     <div className="relative w-full max-w-6xl xl:pr-64">
-      <article className="max-w-4xl mx-auto px-8 py-12">
+      <article className="max-w-4xl mx-auto px-4 md:px-8 py-8 md:py-12">
         <div className="flex justify-end mb-4">
           <Link
             href={`/docs-edit/${slug.join('/')}`}
