@@ -32,7 +32,7 @@ export default async function DocPage({ params }: PageProps) {
   const content = await getDocContentWithBlob(slug);
 
   return (
-    <div className="relative w-full max-w-6xl">
+    <div className="relative w-full max-w-6xl xl:pr-64">
       <article className="max-w-4xl mx-auto px-8 py-12">
         <div className="flex justify-end mb-4">
           <Link

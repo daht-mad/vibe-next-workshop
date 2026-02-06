@@ -10,9 +10,10 @@ interface SidebarProps {
 }
 
 function TreeNode({ node, depth = 0 }: { node: ContentNode; depth?: number }) {
-  const defaultOpen = node.name.toLowerCase() === "curriculum";
-  const [isOpen, setIsOpen] = useState(defaultOpen);
   const pathname = usePathname();
+  const folderPath = `/docs/${node.path.split("/").map((s) => encodeURIComponent(s)).join("/")}`;
+  const isCurrentPathInFolder = pathname.startsWith(folderPath);
+  const [isOpen, setIsOpen] = useState(isCurrentPathInFolder);
 
   const isFolder = node.type === "folder";
   const pathWithoutExt = node.path.replace(/\.(md|pdf)$/, "");

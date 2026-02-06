@@ -22,9 +22,19 @@ function isSupportedFile(fileName: string): boolean {
   return SUPPORTED_EXTENSIONS.some((ext) => fileName.endsWith(ext));
 }
 
-function sortFoldersFirst(a: ContentNode, b: ContentNode): number {
-  if (a.type === b.type) return a.name.localeCompare(b.name, "ko");
-  return a.type === "folder" ? -1 : 1;
+function sortFoldersFirstThenIndexFirst(a: ContentNode, b: ContentNode): number {
+  if (a.type !== b.type) {
+    return a.type === "folder" ? -1 : 1;
+  }
+  
+  if (a.type === "file") {
+    const aIsIndex = a.name.toLowerCase() === "index.md";
+    const bIsIndex = b.name.toLowerCase() === "index.md";
+    if (aIsIndex && !bIsIndex) return -1;
+    if (!aIsIndex && bIsIndex) return 1;
+  }
+  
+  return a.name.localeCompare(b.name, "ko");
 }
 
 export function getContentTree(dir: string = CONTENT_DIR): ContentNode[] {
@@ -56,7 +66,7 @@ export function getContentTree(dir: string = CONTENT_DIR): ContentNode[] {
     }
   }
 
-  return nodes.sort(sortFoldersFirst);
+  return nodes.sort(sortFoldersFirstThenIndexFirst);
 }
 
 function tryFindFile(basePath: string, fileName: string): string | null {
